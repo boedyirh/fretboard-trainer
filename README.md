@@ -1,4 +1,4 @@
-# Fretboard Trainer
+# Fretboard Trainer version 1.0
 By: Boedy Irhadtanto (Dibantu oleh AI)
 
 Aplikasi web sederhana untuk melatih pengenalan nada pada fretboard gitar. Aplikasi ini menampilkan nada acak dan string yang harus Anda identifikasi pada fretboard.
