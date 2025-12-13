@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fretboard Trainer — Latihan Menghapal Fretboard</title>
+<meta name="description" content="A tool for practicing musicians to randomly generate musical keys for exercises. Perfect for improving proficiency in all 12 keys.">
+<meta name="keywords" content="music practice, musical key, random key generator, music exercises, all 12 keys, music training tool, music theory practice">
+<link rel="preload" href="/random-key/flat.woff2" as="font" type="font/woff2">
+<link rel="stylesheet" href="styles.css">
+<link rel="shortcut icon" href="/img/favicon.png?v=4" />
+<link rel="canonical" href="https://ro-che.info/random-key">
+<meta property="og:title" content="Random Musical Key Generator for Practice">
+<meta property="og:description" content="Enhance your music practice with a tool that randomly generates keys. Ideal for musicians looking to master all 12 keys.">
+<meta property="og:url" content="https://ro-che.info/random-key">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Random Musical Key Generator for Practice">
+<meta name="twitter:description" content="Randomly generate musical keys to practice and master all 12 keys. Suitable for musicians of all levels.">
+<meta name="twitter:url" content="https://ro-che.info/random-key">
+<meta name="author" content="Roman Cheplyaka">
+<meta name="robots" content="index, follow">
+</head>
+<body>
+<div class="container">
+  <h1 class="title">Fretboard Trainer</h1>
+  <p class="subtitle">Aplikasi latihan menghapal posisi note pada fretboard Gitar Listrik</p>
+  <p class="subtitle">Cari pada fret bawah dan fret atas (setelah fret 12)</p>
+
+  <div id="display-area">
+    <div id="display-note">C</div>
+    <div id="display-position">Senar: <span id="string-num">1</span></div>
+    <div id="countdown" class="countdown">5s</div>
+  </div>
+
+  <div class="controls">
+    <p>
+
+      <label class="interval-label">Countdown interval (detik): <input id="interval-input" type="number" min="1" value="5"></label>
+    </p>
+    <button id="start-btn">Mulai</button>
+    <button id="stop-btn">Berhenti</button>
+  </div>
+
+  <p class="note">Catatan: Aplikasi akan menampilkan note acak dan posisi senar setiap interval.</p>
+</div>
+<script src="script.js?v=5"></script>
+</body>
+</html>
