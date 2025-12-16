@@ -1,4 +1,4 @@
-# Fretboard Trainer version 1.1
+# Fretboard Trainer version 1.2
 Boedy irhadtanto (with AI)
 
 Terinspirasi dari Random music generator https://ro-che.info/random-key
@@ -10,7 +10,7 @@ Aplikasi web sederhana untuk melatih pengenalan nada pada fretboard gitar. Aplik
 - Terdapat Pengaturan Level agar jumlah kunci dibatasi munculnya.
 - Menampilkan nomor string (1–6) untuk latihan penempatan nada.
 - Mode otomatis: ganti latihan setiap beberapa detik dengan hitungan mundur.
-- Terdapat suara bel untuk setiap pergantian nada
+- Terdapat suara untuk setiap pergantian nada.
 - Kontrol start/stop dan pengaturan interval.
 
 **Struktur proyek**
