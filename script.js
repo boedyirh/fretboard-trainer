@@ -6,16 +6,43 @@ const openStrings = [4, 9, 2, 7, 11, 4]; // indexes into notes array
 let countdownSeconds = 3;
 let autoIntervalMs = 5000;
 let countdownIntervalId = null;
+let allowedNotes = notes.slice(); // can be changed by difficulty level
+let bellAudio = null;
+
+function playBell() {
+  if (!bellAudio) return;
+  try {
+    // rewind and play; browsers may block autoplay until user gesture
+    bellAudio.currentTime = 0;
+    const playPromise = bellAudio.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => { /* ignore play failures (autoplay policy) */ });
+    }
+  } catch (e) {
+    // ignore
+  }
+}
 
 function pickRandomNotePosition() {
-  const targetIdx = Math.floor(Math.random() * notes.length);
-  // compute possible positions on each string (fret 0-11)
+  const targetNote = allowedNotes[Math.floor(Math.random() * allowedNotes.length)];
+  // compute possible positions on each string (we only need to show string number and note name)
   const positions = openStrings.map((openIdx, i) => {
-    return { string: i + 1, note: notes[targetIdx] };
+    return { string: i + 1, note: targetNote };
   });
   // pick a random string among available positions
   const pos = positions[Math.floor(Math.random() * positions.length)];
   return pos;
+}
+
+function setLevel(level) {
+  // level: '1' = A,B,C,D ; '2' = E,F,G ; '3' = all keys
+  if (level === '1') {
+    allowedNotes = ['A','A#','B','C','C#','D','D#'];
+  } else if (level === '2') {
+    allowedNotes = ['E','F','F#','G','G#',];
+  } else {
+    allowedNotes = notes.slice();
+  }
 }
 
 function updateDisplay(pos) {
@@ -33,6 +60,8 @@ function updateCountdownDisplay() {
 function advanceOnce() {
   const pos = pickRandomNotePosition();
   updateDisplay(pos);
+  // play bell to indicate key change
+  playBell();
   countdownSeconds = Math.max(1, Math.floor(autoIntervalMs / 1000));
   updateCountdownDisplay();
 }
@@ -69,6 +98,20 @@ document.addEventListener('DOMContentLoaded', function() {
   const startBtn = document.getElementById('start-btn');
   const stopBtn = document.getElementById('stop-btn');
   const intervalInput = document.getElementById('interval-input');
+  const levelSelect = document.getElementById('level-select');
+
+  // initialize level (default to 3 = all keys)
+  if (levelSelect) {
+    setLevel(levelSelect.value || '3');
+    levelSelect.addEventListener('change', () => {
+      setLevel(levelSelect.value);
+      // immediately show a new note from the selected level
+      advanceOnce();
+    });
+  }
+
+  // get bell audio element if present
+  bellAudio = document.getElementById('bell-audio');
 
   if (startBtn) startBtn.addEventListener('click', () => {
     const val = parseInt(intervalInput && intervalInput.value, 10) || 5;
