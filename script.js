@@ -60,7 +60,16 @@ function updateCountdownDisplay() {
 function advanceOnce() {
   const pos = pickRandomNotePosition();
   updateDisplay(pos);
-  // play bell to indicate key change
+  // attempt to play audio file named after the note (e.g. "B#.mp3").
+  // encodeURIComponent is used so filenames containing "#" are requested correctly ("#" -> "%23").
+  if (bellAudio) {
+    // reset fallback flag for this attempt
+    bellAudio._triedFallback = false;
+    // set src to encoded note filename and try to load it
+    bellAudio.src = encodeURIComponent(pos.note) + '.mp3';
+    try { bellAudio.load(); } catch (e) { /* ignore load errors */ }
+  }
+  // play the audio (will fallback silently if play fails)
   playBell();
   countdownSeconds = Math.max(1, Math.floor(autoIntervalMs / 1000));
   updateCountdownDisplay();
@@ -112,6 +121,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // get bell audio element if present
   bellAudio = document.getElementById('bell-audio');
+
+  if (bellAudio) {
+    // If the requested note audio file cannot be loaded/played, fall back to generic bell sound once.
+    bellAudio.addEventListener('error', function _onAudioError() {
+      if (bellAudio._triedFallback) return;
+      bellAudio._triedFallback = true;
+      try {
+        bellAudio.src = 'bell.mp3';
+        bellAudio.load();
+        playBell();
+      } catch (e) {
+        // ignore further errors
+      }
+    });
+  }
 
   if (startBtn) startBtn.addEventListener('click', () => {
     const val = parseInt(intervalInput && intervalInput.value, 10) || 5;
