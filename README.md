@@ -17,7 +17,7 @@ Aplikasi web sederhana untuk melatih pengenalan nada pada fretboard gitar. Aplik
 - `index.html` — antarmuka pengguna utama.
 - `script.js` — logika pemilihan nada acak dan timer.
 - `styles.css` — gaya visual aplikasi.
-- `bell.mp3` — untuk suara bell , saat pergantian key.
+- `sound file A.mp3 sampai kunci G#.mp3` — untuk suara , saat pergantian key.
 - `random-key/` — (opsional) aset atau file terkait fitur acak.
 
 **Cara menjalankan**
