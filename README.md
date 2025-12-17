@@ -1,4 +1,4 @@
-# Fretboard Trainer version 1.2
+# Fretboard Trainer version 1.3
 Boedy irhadtanto (with AI)
 
 Terinspirasi dari Random music generator https://ro-che.info/random-key
