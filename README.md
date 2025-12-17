@@ -11,6 +11,7 @@ Aplikasi web sederhana untuk melatih pengenalan nada pada fretboard gitar. Aplik
 - Menampilkan nomor string (1–6) untuk latihan penempatan nada.
 - Mode otomatis: ganti latihan setiap beberapa detik dengan hitungan mundur.
 - Terdapat suara untuk setiap pergantian nada.
+- Pergantian Key ke key baru harus berbeda dengan Key sebelumnya.
 - Kontrol start/stop dan pengaturan interval.
 
 **Struktur proyek**
