@@ -8,6 +8,7 @@ let autoIntervalMs = 5000;
 let countdownIntervalId = null;
 let allowedNotes = notes.slice(); // can be changed by difficulty level
 let bellAudio = null;
+let currentNote = null;
 
 function playBell() {
   if (!bellAudio) return;
@@ -23,8 +24,14 @@ function playBell() {
   }
 }
 
-function pickRandomNotePosition() {
-  const targetNote = allowedNotes[Math.floor(Math.random() * allowedNotes.length)];
+function pickRandomNotePosition(excludeNote) {
+  // choose a target note, excluding `excludeNote` when possible
+  let candidates = allowedNotes;
+  if (excludeNote) {
+    const filtered = allowedNotes.filter(n => n !== excludeNote);
+    if (filtered.length > 0) candidates = filtered;
+  }
+  const targetNote = candidates[Math.floor(Math.random() * candidates.length)];
   // compute possible positions on each string (we only need to show string number and note name)
   const positions = openStrings.map((openIdx, i) => {
     return { string: i + 1, note: targetNote };
@@ -50,6 +57,8 @@ function updateDisplay(pos) {
   const stringEl = document.getElementById('string-num');
   if (noteEl) noteEl.textContent = pos.note;
   if (stringEl) stringEl.textContent = pos.string;
+  // remember the currently displayed note so next pick can avoid repeats
+  currentNote = pos.note;
 }
 
 function updateCountdownDisplay() {
@@ -58,7 +67,7 @@ function updateCountdownDisplay() {
 }
 
 function advanceOnce() {
-  const pos = pickRandomNotePosition();
+  const pos = pickRandomNotePosition(currentNote);
   updateDisplay(pos);
   // attempt to play audio file named after the note (e.g. "B#.mp3").
   // encodeURIComponent is used so filenames containing "#" are requested correctly ("#" -> "%23").
