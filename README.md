@@ -1,5 +1,6 @@
 # Fretboard Trainer version 1.3
 Boedy irhadtanto (with AI)
+Demo Page https://boedyirh.github.io/
 
 Terinspirasi dari Random music generator https://ro-che.info/random-key
 
