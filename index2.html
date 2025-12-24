@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fretboard Trainer — Latihan Menghapal Fretboard</title>
+<meta name="description" content="A tool for practicing musicians to randomly generate musical keys for exercises. Perfect for improving proficiency in all 12 keys.">
+<meta name="keywords" content="music practice, musical key, random key generator, music exercises, all 12 keys, music training tool, music theory practice">
+<link rel="preload" href="/random-key/flat.woff2" as="font" type="font/woff2">
+<link rel="stylesheet" href="styles.css">
+<link rel="shortcut icon" href="/img/favicon.png?v=4" />
+<meta property="og:title" content="Random Musical Key Generator for Practice">
+<meta property="og:description" content="Enhance your music practice with a tool that randomly generates keys. Ideal for musicians looking to master all 12 keys.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Random Musical Key Generator for Practice">
+<meta name="twitter:description" content="Randomly generate musical keys to practice and master all 12 keys. Suitable for musicians of all levels.">
+<meta name="author" content="Roman Cheplyaka">
+<meta name="robots" content="index, follow">
+</head>
+<body>
+<div class="container">
+  <h1 class="title">Fretboard Trainer</h1>
+  <p id="subtitle" class="subtitle">Aplikasi latihan menghapal posisi note pada fretboard Gitar Listrik</p>
+  <p id="subtitle2" class="subtitle">Cari pada fret bawah dan fret atas (setelah fret 12)</p>
+
+  <div id="display-area">
+    <div id="display-note">C</div>
+    <div id="display-position"><span id="display-position-label">Senar:</span> <span id="string-num">1</span></div>
+    <div id="countdown" class="countdown">5s</div>
+  </div>
+
+  <div class="controls">
+    <p>
+      <label class="lang-label">Language/Bahasa:
+        <select id="lang-select">
+          <option value="id" selected>Indonesia</option>
+          <option value="en">English</option>
+        </select>
+      </label>
+    </p>
+    <p>
+
+      <label id="interval-label" class="interval-label">Countdown interval (detik): <input id="interval-input" type="number" min="1" value="5"></label>
+    </p>
+    <p>
+      <label id="level-label" class="level-label">Key yang muncul:
+        <select id="level-select">
+          <option value="1">Level 1 — A, B, C, D</option>
+          <option value="2">Level 2 — E, F, G</option>
+          <option value="3" selected>Level 3 — Semua key</option>
+        </select>
+      </label>
+    </p>
+    <button id="start-btn">Mulai</button>
+    <button id="stop-btn">Berhenti</button>
+  </div>
+
+  <p id="note-text" class="note">Catatan: Aplikasi akan menampilkan note acak dan posisi senar setiap interval.</p>
+</div>
+  <!-- Preload bell sound for key changes -->
+  <audio id="bell-audio" src="bell.mp3" preload="auto"></audio>
+  <script src="script.js?v=5"></script>
+</body>
+</html>
+
