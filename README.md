@@ -1,3 +1,41 @@
+Fretboard Trainer version 1.4
+
+Boedy Irhadtanto (with AI)
+Demo Page: https://boedyirh.github.io/
+
+Inspired by the Random Music Generator
+https://ro-che.info/random-key
+
+A simple web application designed to train note recognition on the guitar fretboard. The app displays a random note and string that you need to identify on the fretboard.
+
+Main Features
+
+Displays random notes (C–B).
+
+Level settings to limit which keys can appear.
+
+Displays string numbers (1–6) for practicing note placement.
+
+Automatic mode: changes exercises every few seconds with a countdown.
+
+Sound feedback for every note change.
+
+Each new key is guaranteed to be different from the previous key.
+
+Start/stop controls and interval settings.
+
+Bilingual support (English and Indonesian).
+
+Project Structure
+
+index.html — main user interface.
+
+script.js — logic for random note selection and timer.
+
+styles.css — visual styling of the application.
+
+sound file — A.mp3
+
 # Fretboard Trainer version 1.4
 Boedy irhadtanto (with AI)
 Demo Page https://boedyirh.github.io/
