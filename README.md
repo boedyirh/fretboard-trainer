@@ -1,4 +1,4 @@
-# Fretboard Trainer version 1.3
+# Fretboard Trainer version 1.4
 Boedy irhadtanto (with AI)
 Demo Page https://boedyirh.github.io/
 
@@ -14,6 +14,7 @@ Aplikasi web sederhana untuk melatih pengenalan nada pada fretboard gitar. Aplik
 - Terdapat suara untuk setiap pergantian nada.
 - Pergantian Key ke key baru harus berbeda dengan Key sebelumnya.
 - Kontrol start/stop dan pengaturan interval.
+- Bilingual (English and Indonesian
 
 **Struktur proyek**
 - `index.html` — antarmuka pengguna utama.
