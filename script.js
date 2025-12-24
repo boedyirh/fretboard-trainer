@@ -9,6 +9,74 @@ let countdownIntervalId = null;
 let allowedNotes = notes.slice(); // can be changed by difficulty level
 let bellAudio = null;
 let currentNote = null;
+let currentLang = 'id';
+
+const translations = {
+  id: {
+    title: 'Fretboard Trainer',
+    subtitle: 'Aplikasi latihan menghapal posisi note pada fretboard Gitar Listrik',
+    subtitle2: 'Cari pada fret bawah dan fret atas (setelah fret 12)',
+    displayPositionLabel: 'Senar:',
+    intervalLabel: 'Countdown interval (detik):',
+    levelLabel: 'Key yang muncul:',
+    levelOptions: [
+      'Level 1 — A, B, C, D',
+      'Level 2 — E, F, G',
+      'Level 3 — Semua key'
+    ],
+    startBtn: 'Mulai',
+    stopBtn: 'Berhenti',
+    noteText: 'Catatan: Aplikasi akan menampilkan note acak dan posisi senar setiap interval.'
+  },
+  en: {
+    title: 'Fretboard Trainer',
+    subtitle: 'Practice memorizing note positions on the electric guitar fretboard',
+    subtitle2: 'Search on lower and upper frets (after fret 12)',
+    displayPositionLabel: 'String:',
+    intervalLabel: 'Countdown interval (seconds):',
+    levelLabel: 'Keys to appear:',
+    levelOptions: [
+      'Level 1 — A, B, C, D',
+      'Level 2 — E, F, G',
+      'Level 3 — All keys'
+    ],
+    startBtn: 'Start',
+    stopBtn: 'Stop',
+    noteText: 'Note: The app will show a random note and string position at each interval.'
+  }
+};
+
+function applyLanguage(lang) {
+  const t = translations[lang] || translations.id;
+  const titleEl = document.querySelector('.title');
+  const subtitleEl = document.getElementById('subtitle');
+  const subtitle2El = document.getElementById('subtitle2');
+  const intervalLabel = document.getElementById('interval-label');
+  const levelLabel = document.getElementById('level-label');
+  const levelSelect = document.getElementById('level-select');
+  const startBtn = document.getElementById('start-btn');
+  const stopBtn = document.getElementById('stop-btn');
+  const noteText = document.getElementById('note-text');
+  const displayPositionLabelEl = document.getElementById('display-position-label');
+
+  if (titleEl) titleEl.textContent = t.title;
+  if (subtitleEl) subtitleEl.textContent = t.subtitle;
+  if (subtitle2El) subtitle2El.textContent = t.subtitle2;
+  if (intervalLabel) intervalLabel.firstChild && (intervalLabel.childNodes[0].textContent = t.intervalLabel + ' ');
+  if (levelLabel) levelLabel.childNodes[0] && (levelLabel.childNodes[0].textContent = t.levelLabel + ' ');
+  if (levelSelect) {
+    // update option texts but keep values
+    const opts = levelSelect.options;
+    for (let i = 0; i < opts.length && i < t.levelOptions.length; i++) {
+      opts[i].text = t.levelOptions[i];
+    }
+  }
+  if (startBtn) startBtn.textContent = t.startBtn;
+  if (stopBtn) stopBtn.textContent = t.stopBtn;
+  if (noteText) noteText.textContent = t.noteText;
+  if (displayPositionLabelEl) displayPositionLabelEl.textContent = (t.displayPositionLabel || 'Senar:');
+  document.title = t.title;
+}
 
 function playBell() {
   if (!bellAudio) return;
@@ -74,8 +142,13 @@ function advanceOnce() {
   if (bellAudio) {
     // reset fallback flag for this attempt
     bellAudio._triedFallback = false;
-    // set src to encoded note filename and try to load it
-    bellAudio.src = encodeURIComponent(pos.note) + '.mp3';
+    // choose filename based on selected language
+    let filename = encodeURIComponent(pos.note) + '.mp3';
+    if (currentLang === 'en') {
+      filename = 'Eng-' + encodeURIComponent(pos.note) + '.mp3';
+    }
+    // set src to filename and try to load it
+    bellAudio.src = filename;
     try { bellAudio.load(); } catch (e) { /* ignore load errors */ }
   }
   // play the audio (will fallback silently if play fails)
@@ -130,6 +203,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // get bell audio element if present
   bellAudio = document.getElementById('bell-audio');
+
+  // language selector
+  const langSelect = document.getElementById('lang-select');
+  if (langSelect) {
+    currentLang = langSelect.value || 'id';
+    applyLanguage(currentLang);
+    langSelect.addEventListener('change', () => {
+      currentLang = langSelect.value || 'id';
+      applyLanguage(currentLang);
+      // show a new note after language change to reflect audio filename
+      advanceOnce();
+    });
+  } else {
+    applyLanguage(currentLang);
+  }
 
   if (bellAudio) {
     // If the requested note audio file cannot be loaded/played, fall back to generic bell sound once.

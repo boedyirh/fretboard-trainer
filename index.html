@@ -21,22 +21,30 @@
 <body>
 <div class="container">
   <h1 class="title">Fretboard Trainer</h1>
-  <p class="subtitle">Aplikasi latihan menghapal posisi note pada fretboard Gitar Listrik</p>
-  <p class="subtitle">Cari pada fret bawah dan fret atas (setelah fret 12)</p>
+  <p id="subtitle" class="subtitle">Aplikasi latihan menghapal posisi note pada fretboard Gitar Listrik</p>
+  <p id="subtitle2" class="subtitle">Cari pada fret bawah dan fret atas (setelah fret 12)</p>
 
   <div id="display-area">
     <div id="display-note">C</div>
-    <div id="display-position">Senar: <span id="string-num">1</span></div>
+    <div id="display-position"><span id="display-position-label">Senar:</span> <span id="string-num">1</span></div>
     <div id="countdown" class="countdown">5s</div>
   </div>
 
   <div class="controls">
     <p>
-
-      <label class="interval-label">Countdown interval (detik): <input id="interval-input" type="number" min="1" value="5"></label>
+      <label class="lang-label">Language/Bahasa:
+        <select id="lang-select">
+          <option value="id" selected>Indonesia</option>
+          <option value="en">English</option>
+        </select>
+      </label>
     </p>
     <p>
-      <label class="level-label">Key yang muncul:
+
+      <label id="interval-label" class="interval-label">Countdown interval (detik): <input id="interval-input" type="number" min="1" value="5"></label>
+    </p>
+    <p>
+      <label id="level-label" class="level-label">Key yang muncul:
         <select id="level-select">
           <option value="1">Level 1 — A, B, C, D</option>
           <option value="2">Level 2 — E, F, G</option>
@@ -48,7 +56,7 @@
     <button id="stop-btn">Berhenti</button>
   </div>
 
-  <p class="note">Catatan: Aplikasi akan menampilkan note acak dan posisi senar setiap interval.</p>
+  <p id="note-text" class="note">Catatan: Aplikasi akan menampilkan note acak dan posisi senar setiap interval.</p>
 </div>
   <!-- Preload bell sound for key changes -->
   <audio id="bell-audio" src="bell.mp3" preload="auto"></audio>
