@@ -1,6 +1,6 @@
-Fretboard Trainer version 1.4
+# Fretboard Trainer version 1.4 (English Version)
 
-Boedy Irhadtanto (with AI)
+Boedy Irhadtanto
 Demo Page: https://boedyirh.github.io/
 
 Inspired by the Random Music Generator
@@ -37,7 +37,7 @@ styles.css — visual styling of the application.
 sound file — A.mp3
 
 # Fretboard Trainer version 1.4
-Boedy irhadtanto (with AI)
+Boedy irhadtanto
 Demo Page https://boedyirh.github.io/
 
 Terinspirasi dari Random music generator https://ro-che.info/random-key
